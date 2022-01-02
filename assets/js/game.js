@@ -7,6 +7,13 @@
 // Display player's score in alert after the end of a game and ask if they want to play again
 // After player defeats or skips an enemy-robot, they will be asked if they want to visit the shop
 
+ // function to generate a random numeric value
+ var randomNumber = function(min, max) {
+  var value = Math.floor(Math.random() * (max - min + 1) + min);
+
+  return value;
+};
+
 var fight = function(enemy) {
     // repeat and execute as long as the enemy-robot is alive
     while(playerInfo.health > 0 && enemy.health > 0)  {
@@ -80,7 +87,6 @@ for (var i = 0; i < enemyInfo.length; i++) {
   if (playerInfo.health > 0) {
    // let player know what round they are in, remember that arrays start at 0, so it needs to have 1 added to it
    window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ));
-  
    //pick new enemy to fight based on index of enemy.names array
    var pickedEnemyObj = enemyInfo[i];
 
@@ -162,15 +168,21 @@ endGame();
     }
   };
 
-  // function to generate a random numeric value
-  var randomNumber = function(min, max) {
-    var value = Math.floor(Math.random() * (max - min + 1) + min);
-
-    return value;
+  // function to set name
+  var getPlayerName = function() {
+    var name = "";
+  
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
   }
 
+    console.log("Your robot's name is " + name);
+    return name;
+  };
+
+  /* GAME INFORMATION / VARIABLES */
   var playerInfo = {
-    name: window.prompt("What is your robot's name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
@@ -217,7 +229,12 @@ endGame();
   ];
   
   
-  // You can also log multiple values at once like this
-  console.log(playerInfo.name, playerInfo.attack, playerInfo.health);
+// You can also log multiple values at once like this
+console.log(playerInfo.name, playerInfo.attack, playerInfo.health);
+console.log(enemyInfo);
+console.log(enemyInfo[0]);
+console.log(enemyInfo[0].name);
+console.log(enemyInfo[0]['attack']);
+
    // play again
 startGame();
